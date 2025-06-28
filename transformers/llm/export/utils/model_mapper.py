@@ -565,6 +565,56 @@ class ModelMapper:
         self.regist('qwen2_vl', qwen2vl_map)
         self.regist('qwen2_5_vl', qwen2vl_map)
 
+    def regist_minicpm4(self):
+        minicpm4_map = {
+            'config': {
+                'hidden_size': 'hidden_size',
+                'head_dim': 'head_dim',
+                'num_attention_heads': 'num_attention_heads',
+                'num_hidden_layers': 'num_hidden_layers',
+                'num_key_value_heads': 'num_key_value_heads',
+                'rope_theta': 'rope_theta',
+                'rope_scaling': 'rope_scaling',
+                'intermediate_size': 'intermediate_size',
+                'max_position_embeddings': 'max_position_embeddings',
+                'vocab_size': 'vocab_size',
+                'bos_token_id': 'bos_token_id',
+                'eos_token_id': 'eos_token_id',
+                'pad_token_id': 'pad_token_id',
+                'rms_norm_eps': 'rms_norm_eps',
+                'attention_bias': 'attention_bias',
+                'attention_dropout': 'attention_dropout',
+                'scale_emb': 'scale_emb',
+                'dim_model_base': 'dim_model_base',
+                'scale_depth': 'scale_depth'
+            },
+            'model': {
+                'lm_': 'lm_head',
+                'embed_': 'model.embed_tokens',
+                'blocks_': 'model.layers',
+                'final_layernorm_': 'model.norm',
+                'rotary_emb': 'model.rotary_emb',
+                'rotary_emb_local': 'model.rotary_emb_local'
+            },
+            'decoder': {
+                'self_attn': 'self_attn',
+                'mlp': 'mlp',
+                'input_layernorm': 'input_layernorm',
+                'post_attention_layernorm': 'post_attention_layernorm',
+                'pre_feedforward_layernorm': 'pre_feedforward_layernorm',
+                'post_feedforward_layernorm': 'post_feedforward_layernorm'
+            },
+            'attention': {
+                'q_proj': 'q_proj',
+                'k_proj': 'k_proj',
+                'v_proj': 'v_proj',
+                'o_proj': 'o_proj',
+                'q_norm': 'q_norm',
+                'k_norm': 'k_norm'
+            }
+        }
+        self.regist('minicpm4', minicpm4_map)
+
     def defualt_map(self):
         # default map is `LlamaForCausalLM`
         self.config_key = 'config'
