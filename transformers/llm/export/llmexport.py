@@ -105,6 +105,10 @@ class LlmExporter(torch.nn.Module):
         elif 'SmolVLM' in model_path or 'SmolDocling' in model_path:
             from transformers import AutoModelForVision2Seq
             self.model = AutoModelForVision2Seq.from_pretrained(model_path, torch_dtype='auto').eval()
+        elif 'MiniCPM4' in model_path or 'minicpm' in model_path.lower():
+            self.model = AutoModelForCausalLM.from_pretrained(
+                model_path, torch_dtype='auto', trust_remote_code=True
+            ).eval()
         else:
             try:
                 self.model = AutoModelForCausalLM.from_pretrained(model_path, torch_dtype='auto', trust_remote_code=True).eval()
