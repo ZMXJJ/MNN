@@ -466,6 +466,11 @@ class LlmExporter(torch.nn.Module):
             template['system'] = '{content}\n'
             template['user'] = '\nUser: {content}\n'
             template['assistant'] = '\nAssistant: {content}\n<|end_of_sentence|>'
+        if self.model_type == 'minicpm':
+            template['bos'] = '<s>'
+            template['system'] = '{content}\n'
+            template['user'] = '<|im_start|>user\n{content}<|im_end|>\n'
+            template['assistant'] = '<|im_start|>assistant\n{content}<|im_end|>\n'
         return template
 
     def build_prompt(self, messages):
