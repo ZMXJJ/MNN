@@ -564,6 +564,42 @@ class ModelMapper:
         }
         self.regist('qwen2_vl', qwen2vl_map)
         self.regist('qwen2_5_vl', qwen2vl_map)
+    
+    def regist_minicpm(self):
+        minicpm_map = {
+            'config': {
+                'hidden_size': 'hidden_size',
+                'num_attention_heads': 'num_attention_heads',
+                'num_hidden_layers': 'num_hidden_layers',
+                'num_key_value_heads': 'num_key_value_heads',
+                'rope_theta': 'rope_theta',
+                'rope_scaling': 'rope_scaling',
+                'max_position_embeddings': 'max_position_embeddings',
+                'vocab_size': 'vocab_size',
+                'bos_token_id': 'bos_token_id',
+                'eos_token_id': 'eos_token_id',
+                'pad_token_id': 'pad_token_id',
+            },
+            'model': {
+                'lm_': 'lm_head',
+                'embed_': 'model.embed_tokens',
+                'blocks_': 'model.layers',
+                'final_layernorm_': 'model.norm',
+            },
+            'decoder': {
+                'self_attn': 'self_attn',
+                'mlp': 'mlp',
+                'input_layernorm': 'input_layernorm',
+                'post_attention_layernorm': 'post_attention_layernorm'
+            },
+            'attention': {
+                'q_proj': 'q_proj',
+                'k_proj': 'k_proj',
+                'v_proj': 'v_proj',
+                'o_proj': 'o_proj'
+            }
+        }
+        self.regist('minicpm', minicpm_map)
 
     def defualt_map(self):
         # default map is `LlamaForCausalLM`
